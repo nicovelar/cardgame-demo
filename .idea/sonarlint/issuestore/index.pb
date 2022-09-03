@@ -25,10 +25,6 @@ Tbusiness/src/main/java/org/example/cardgame/usecase/gateway/ListaDeCartaService
 iapplications/app-service/src/main/java/org/example/cardgame/application/adapter/bus/RabbitMQEventBus.java,d/9/d9a71b369b59dddc84af31472aff4453266ddd67
 D
 applications/pom.xml,c/d/cd22bd51efb1b1a9cf84581e8101c05ee6a6f156
-P
- applications/app-service/pom.xml,c/7/c7a590dedf9eafca5993f04073863728ee8a51cf
-N
-applications/app-proxy/pom.xml,f/8/f80545d980d5a03b05cb3fa22bcb7c94ccddeff0
 â
 Yapplications/app-proxy/src/main/java/org/example/cardgame/websocket/bus/Notification.java,3/4/34273e7d9c459c2aeeeeb0e71cd79a8e1e3509e4
 z
@@ -43,12 +39,6 @@ Jdomain/src/main/java/org/example/cardgame/domain/events/TableroCreado.java,e\b
 Pbusiness/src/main/java/org/example/cardgame/usecase/usecase/UseCaseForEvent.java,9\3\93d539853d5520570b6a8745a9cfa1a1b1893478
 r
 Bdomain/src/main/java/org/example/cardgame/domain/values/Ronda.java,7\8\78aeb62a731f509149c43d077d8a7050ecd968d5
-@
-business/pom.xml,d\4\d4ebdfff43bfaf86e620b416afb4835b5f67b594
->
-domain/pom.xml,8\b\8b11330a6810846535e4b5ba2024ccfcee112862
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 Ñ
 Tdomain/src/main/java/org/example/cardgame/domain/events/CartasAsignadasAJugador.java,4\a\4aea8aee0d7963d123ab8a2ccfea6bf1c04cddff
 v
@@ -99,8 +89,6 @@ vapplications/app-service/src/main/java/org/example/cardgame/application/handle/
 `applications/app-service/src/main/java/org/example/cardgame/application/handle/ErrorHandler.java,a\e\aed25e7ad7e33c8c4231e44e7e5d8a2c0edd94dd
 í
 bapplications/app-proxy/src/main/java/org/example/cardgame/websocket/bus/RabbitMQEventConsumer.java,5\f\5f89f791c3923b10eb4c474d48d070fde247cb40
-q
-Adomain/src/main/java/org/example/cardgame/domain/values/Mazo.java,a\5\a5becc604365569cf877051ee46b419041cfe3d8
 É
 Sbusiness/src/main/java/org/example/cardgame/usecase/gateway/model/CartaMaestra.java,6\2\62428f71a18069cbb7d8270fb89a6346a2595575
 ö
@@ -147,14 +135,6 @@ r
 Bdomain/src/main/java/org/example/cardgame/domain/values/Carta.java,9\4\94e9d364cb04926a4f221adca30c9d104b0d3480
 T
 $applications/app-proxy/app-proxy.iml,e\8\e8a2fe5cb0946180a4d501ddd9050ebef609f167
-à
-Xapplications/app-proxy/src/main/java/org/example/cardgame/websocket/WebSocketConfig.java,6\f\6ff6f4ecb96949ebe565b317a357f21d074ebc58
-â
-Yapplications/app-proxy/src/main/java/org/example/cardgame/websocket/SocketController.java,e\5\e5b8723b868ecd1cf8e5b39960fa73c8f75a5d49
-å
-\applications/app-proxy/src/main/java/org/example/cardgame/websocket/GsonEventSerializer.java,a\2\a27f38d224f08cd8dba6c9c89f9a7be5ee900ea7
-ä
-Zapplications/app-proxy/src/main/java/org/example/cardgame/websocket/ApplicationConfig.java,b\1\b14502e5ec7c9dc1f6354a454ec24473ebf3ebec
 •
 uapplications/app-service/src/main/java/org/example/cardgame/application/handle/materialize/GameMaterializeHandle.java,2\f\2f37074542a879aafa21e05976375577cae5592e
 •
@@ -169,15 +149,3 @@ gapplications/app-service/src/main/java/org/example/cardgame/application/handle/
 qapplications/app-service/src/main/java/org/example/cardgame/application/handle/usecase/CrearRondaEventHandle.java,a\5\a542d11f6b9643153b50e7ac3b42177f7d7972ed
 ë
 aapplications/app-service/src/main/java/org/example/cardgame/application/handle/CommandHandle.java,1\b\1b131b7e0b03c237b8d6408a499a7361209335b9
-M
-applications/applications.iml,b\2\b2a8a52c2075b8ab224631a9634da351c5ba60ca
-í
-bbusiness/src/test/java/org/example/cardgame/usecase/usecase/IniciarCuentaRegresivaUseCaseTest.java,5\7\57c4e731f4fb1422758fd6f4ac39bf828f1160f2
-ä
-Zbusiness/src/test/java/org/example/cardgame/usecase/usecase/FinalizarRondaUseCaseTest.java,4\b\4b9fba784985f75fe9182e8e8765b92944809e2f
-ç
-]business/src/test/java/org/example/cardgame/usecase/usecase/DeterminarGanadorUseCaseTest.java,5\b\5b5cf4e7b83f80f6f8c32dddc5dd8d5cd613f5d7
-á
-Wapplications/app-service/src/main/java/org/example/cardgame/application/AppService.java,3\e\3e99e4004b5fb0dfbcdb3cbd6df742c54fde205c
-Ç
-Rapplications/app-proxy/src/main/java/org/example/cardgame/websocket/AppSocket.java,2\f\2fa054f5c7e5e8fa7cfcba22d9933a9fca99f66d
