@@ -1,0 +1,33 @@
+.zoom .jugar {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.zoom .jugar {
+    transition: 0.05s all ease-in-out;
+}
+
+.zoom:hover .jugar {
+    transform: scale(1.4);
+}
+
+.zoom .eliminar {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.zoom .eliminar {
+    transition: 0.05s all ease-in-out;
+}
+
+.zoom:hover .eliminar {
+    transform: scale(1.5);
+}
+
+.mat-elevation-z8 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+  }

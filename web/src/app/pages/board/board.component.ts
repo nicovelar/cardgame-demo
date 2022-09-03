@@ -14,6 +14,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   cartasDelJugador: Carta[] = [];
   cartasDelTablero: Carta[] = [];
+  cartasJugadorTablero: string[] = []
   tiempo: number = 0;
   jugadoresRonda: number = 0;
   jugadoresTablero: number = 0;
@@ -21,12 +22,16 @@ export class BoardComponent implements OnInit, OnDestroy {
   juegoId: string = "";
   uid: string = "";
   roundStarted:boolean = false;
+  ganadorAlias:string = "";
+  ganador:boolean = false;
+
 
   constructor(
     public api: ApiService,
     public authService: AuthService,
     public ws: WebsocketService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private router: Router) {
 
   }
 
@@ -40,7 +45,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
       this.api.getTablero(this.juegoId).subscribe((element) => {
         
-        this.cartasDelTablero = Object.entries(element.tablero.cartas).flatMap((a: any) => {
+        this.cartasDelTablero = Object.entries(element.tablero.cartas).map((a: any) => {
           return a[1];
         });
         this.tiempo = element.tiempo;
@@ -49,30 +54,74 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.numeroRonda = element.ronda.numero;
       });
 
-      this.ws.connect(this.juegoId).subscribe({
+      this.ws.connect(this.juegoId).subscribe({  
         next: (event:any) => {
-          if (event.type === 'cardgame.ponercartaentablero') {
-            this.cartasDelTablero.push({
-              cartaId: event.carta.cartaId.uuid,
-              poder: event.carta.poder,
-              estaOculta: event.carta.estaOculta,
-              estaHabilitada: event.carta.estaHabilitada,
-            });
+          if (event.type === 'cardgame.ponercartaentablero' ) {
+            
+              this.cartasDelTablero.push({
+                cartaId: event.carta.cartaId.uuid,
+                poder: event.carta.poder,
+                estaOculta: event.carta.estaOculta,
+                estaHabilitada: event.carta.estaHabilitada
+              })
+              if(event.jugadorId.uuid == this.uid) {
+                this.cartasJugadorTablero.push(event.carta.cartaId.uuid)
+              }
+              
           }
+          
           if (event.type === 'cardgame.cartaquitadadelmazo') {
             this.cartasDelJugador = this.cartasDelJugador
-              .filter((item) => item.cartaId !==  event.carta.cartaId.uuid);
-          }
+              .filter((item) => item.cartaId !== event.carta.cartaId.uuid);
+
+          }         
+
           if (event.type === 'cardgame.tiempocambiadodeltablero') {
             this.tiempo = event.tiempo;
+          }
+
+          if (event.type === 'cardgame.rondacreada') {
+            this.tiempo = event.tiempo;
+            this.jugadoresRonda = event.ronda.jugadores.length;
+            this.numeroRonda = event.ronda.numero;
           }
 
           if(event.type === 'cardgame.rondainiciada'){
             this.roundStarted = true;
           }
 
-          if(event.type === 'cargame.rondaterminada'){
+          if(event.type === 'cardgame.rondaterminada'){
             this.roundStarted = false;
+            this.cartasDelTablero = []
+            this.cartasJugadorTablero = []
+          }
+
+          if(event.type === 'cardgame.juegofinalizado') {
+            this.ganadorAlias = "Ganador:" + event.alias;
+            this.ganador = true;
+          }
+
+          if(event.type === 'cardgame.cartaquitadadeltablero') {
+            let carta: Carta[]
+            carta = this.cartasDelTablero.filter(carta => carta.cartaId === event.cartaId)
+            this.cartasDelJugador.push(carta[0])
+            this.cartasDelTablero = this.cartasDelTablero.filter(cartas => cartas.cartaId !== event.cartaId)
+          }
+
+          if(event.type === 'cardgame.cartasasignadasajugador'){
+            if(event.ganadorId.uuid === this.uid){
+              event.cartasApuesta.forEach((carta: any) => {
+                this.cartasDelJugador.push({
+                  cartaId: carta.cartaId.uuid,
+                  poder: carta.poder,
+                  estaOculta: carta.estaOculta,
+                  estaHabilitada: carta.estaHabilitada
+                });
+              });
+              alert("Ganaste la ronda!")
+            }else{
+              alert("Perdiste la ronda :(")
+            }
           }
         },
         error: (err:any) => console.log(err),
@@ -94,10 +143,26 @@ export class BoardComponent implements OnInit, OnDestroy {
     }).subscribe();
   }
 
+
+  comparar(cartaId: string) {
+   return this.cartasJugadorTablero.includes(cartaId)
+  }
+
+  quitar(cartaId: string) {
+    this.api.quitarCarta({
+      cartaId: cartaId,
+      juegoId: this.juegoId,
+      jugadorId: this.uid
+    }).subscribe();
+  }
+
   iniciarRonda(){
     this.api.iniciarRonda({
       juegoId: this.juegoId,
     }).subscribe();
   }
 
+
+
 }
+

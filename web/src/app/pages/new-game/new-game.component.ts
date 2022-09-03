@@ -16,7 +16,7 @@ export class User {
     public displayName: string,
     public email: string,
     public uid: string,
-    public selected?: boolean
+    public selected: boolean
   ) {
     if (selected === undefined) selected = false;
   }
@@ -68,7 +68,7 @@ export class NewGameComponent implements OnInit, OnDestroy {
     this.uuid = uuidv4();
     this.ws.connect(this.uuid).subscribe({
       next: (event: any) => {
-        if (event.type === 'cargame.juegocreado') {
+        if (event.type === 'cardgame.juegocreado') {
           this.router.navigate(['list']);
         }
       },
@@ -90,7 +90,7 @@ export class NewGameComponent implements OnInit, OnDestroy {
     return this.api.crearJuego(
       {
         juegoId: this.uuid,
-        jugadores,
+        jugadores:jugadores,
         jugadorPrincipalId: this.authService.userData.uid
       }
     ).subscribe();

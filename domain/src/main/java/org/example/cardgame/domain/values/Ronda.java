@@ -48,6 +48,10 @@ public class Ronda implements ValueObject<Ronda.Props> {
         return new Ronda(this.numero, this.jugadores, false);
     }
 
+    public Integer getNumero() {
+        return numero;
+    }
+
     /**
      * Incrementar ronda ronda.
      *

@@ -4,6 +4,9 @@ import co.com.sofka.domain.generic.DomainEvent;
 
 import co.com.sofka.domain.generic.Identity;
 import org.bson.Document;
+import org.example.cardgame.application.handle.model.JuegoListViewModel;
+import org.example.cardgame.application.handle.model.MazoViewModel;
+import org.example.cardgame.domain.Juego;
 import org.example.cardgame.domain.events.*;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
@@ -76,11 +79,12 @@ public class GameMaterializeHandle {
         var document = new Document();
         var carta = event.getCarta().value();
         var jugadorId = event.getJugadorId().value();
-        document.put("cartaId", carta.cartaId().value());
-        document.put("estaOculta", carta.estaOculta());
-        document.put("poder", carta.poder());
-        document.put("estaHabilitada", carta.estaHabilitada());
-        document.put("jugadorId", jugadorId);
+
+            document.put("cartaId", carta.cartaId().value());
+            document.put("estaOculta", carta.estaOculta());
+            document.put("poder", carta.poder());
+            document.put("estaHabilitada", carta.estaHabilitada());
+            document.put("jugadorId", jugadorId);
 
         data.set("fecha", Instant.now());
         data.push("tablero.cartas."+jugadorId, document);
@@ -148,10 +152,69 @@ public class GameMaterializeHandle {
         template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
     }
 
+    @EventListener
+    public void handleJuegoEliminado(JuegoEliminado event){
+        template.findAndRemove(getFilterByAggregateId(event), JuegoListViewModel.class, COLLECTION_VIEW).block();
+    }
+
+//    @EventListener
+//    public void handleCartaQuitadaDelTablero(CartaQuitadaDelTablero event){
+//        var data = new Update();
+//        var document = new Document();
+//        var carta = event.getCarta().value();
+//        var jugadorId = event.getJugadorId().value();
+//        document.clear();
+//
+//        data.set("fecha", Instant.now());
+//        data.push("tablero.cartas."+jugadorId, document);
+//        template.updateFirst(getFilterByAggregateId(event),data, COLLECTION_VIEW).block();
+//          }
+
+//    @EventListener
+//    public void handleCartaQuitadaDelTablero(CartaQuitadaDelTablero event){
+//        var query = getFilterByAggregateId(event);
+//        template.findOne(query, JuegoListViewModel.class, COLLECTION_VIEW)
+//                .subscribe(juegoListViewModel -> {
+//                    var data = new Update();
+//                    var jugadorId =  juegoListViewModel.getJugadores().get(event.getJugadorId());
+//
+//                    cartaSet.removeIf(carta -> event.getCarta().value().cartaId().value().equals(carta.getCartaId()));
+//
+//                    data.set("cartas", cartaSet);
+//                    data.set("fecha", Instant.now());
+//                    template.updateFirst(query, data, COLLECTION_VIEW).block();
+//                });
+//    }
+
+        @EventListener
+    public void handleCartaQuitadaDelTablero(CartaQuitadaDelTablero event){
+        var query = getFilterByAggregateId(event);
+        template.findOne(query, JuegoListViewModel.class, COLLECTION_VIEW)
+                .subscribe(juegoListViewModel -> {
+                    var data = new Update();
+                    var carta = event.getCarta().value();
+                    var document = new Document();
+                    var jugadorId =  juegoListViewModel.getJugadores().get(event.getJugadorId());
+                    document.remove("cartaId", carta.cartaId().value());
+                    document.remove("estaOculta", carta.estaOculta());
+                    document.remove("poder", carta.poder());
+                    document.remove("estaHabilitada", carta.estaHabilitada());
+                    document.remove("jugadorId", jugadorId);
+
+                    data.set("fecha", Instant.now());
+                    data.push("tablero.cartas."+jugadorId, document);
+                    template.updateFirst(query, data, COLLECTION_VIEW).block();
+                });
+    }
+
+
+
+
 
     private Query getFilterByAggregateId(DomainEvent event) {
         return new Query(
                 Criteria.where("_id").is(event.aggregateRootId())
         );
     }
+
 }

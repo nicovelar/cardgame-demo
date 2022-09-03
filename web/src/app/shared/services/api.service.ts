@@ -6,9 +6,11 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { CrearJuegoCommand } from '../commands/crearJuegoCommand';
 import { CrearRondaCommand } from '../commands/crearRondaCommand';
+import { EliminarJuegoCommand } from '../commands/eliminarJuegoCommand';
 import { IniciarJuegoCommand } from '../commands/iniciarJuegoCommand';
 import { IniciarRondaCommand } from '../commands/iniciarRondaCommand';
 import { PonerCartaCommand } from '../commands/ponerCartaCommand';
+import { QuitarCartaCommand } from '../commands/quitarCartaCommand';
 import { JuegoModel, Jugador } from '../model/juego';
 import { TableroModel } from '../model/tablero';
 import { User } from '../model/user';
@@ -53,6 +55,10 @@ export class ApiService {
     return this.http.post(environment.apiBase + '/juego/poner', command);
   }
 
+  quitarCarta(command: QuitarCartaCommand){
+    return this.http.post(environment.apiBase + '/juego/quitar', command);
+  }
+
   iniciarRonda(command: IniciarRondaCommand){
     return this.http.post(environment.apiBase + '/juego/ronda/iniciar', command);
   }
@@ -62,6 +68,12 @@ export class ApiService {
   }
 
   crearRonda(command: CrearRondaCommand){
+    
     return this.http.post(environment.apiBase + '/juego/crear/ronda', command);
+    
+  }
+
+  eliminarJuego(command: EliminarJuegoCommand) {
+    return this.http.post(environment.apiBase + '/juego/eliminar', command);
   }
 }

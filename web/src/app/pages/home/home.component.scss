@@ -1,0 +1,14 @@
+
+.play {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.play img {
+    width: 100%;
+    transition: 0.3s all ease-in-out;
+}
+
+.play:hover img {
+    transform: scale(1.3);
+}

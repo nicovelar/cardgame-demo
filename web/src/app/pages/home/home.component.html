@@ -1,1 +1,33 @@
-<p>home works!</p>
+<mat-grid-list cols="3">
+    <mat-grid-tile style="height: 90vh;" >
+        <img mat-card-image src="/assets/1.jpg" />
+    </mat-grid-tile>
+    <mat-grid-tile style="height: 90vh;">
+        <div style="text-align: center;">
+            <img mat-card-image src="/assets/2.jpg" style="position:absolute; height: 120vh;  transform: translate(-47%, -30%); width: 100%;"/>
+            <mat-card class="example-card" style="transform: translate(0%, -100%); background-color: black;">
+                <mat-card-header style="margin-bottom:150px ;">
+                  <mat-card-title style="margin-left: 90px; margin-bottom:50px; margin-right: 100px" >Indicaciones de Juego</mat-card-title> 
+                  <mat-card-subtitle style="color: white;" >Para iniciar el juego debes estar registrado, incluso los jugadores</mat-card-subtitle>
+                </mat-card-header>
+               
+                <mat-card-actions >
+                  <a (click)="goNew()"> 
+                    <div class="play">
+                      <img class="zoom" src="/assets/BotonJugar.png" style="width: 219px; position: absolute; right: 250px; top: 150px;" alt="Geeks Image">
+                    </div>
+                  </a>
+                  <a (click)="goList()" >
+                    <div class="play">
+                      <img class="zoom" src="/assets/JuegosCreados.png" style="width: 162px; position: absolute; top: 150px; margin-left: 70px;" alt="Geeks Image">
+                    </div>
+                </a>
+                </mat-card-actions>
+              </mat-card> 
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile style="height: 90vh;">
+        <img mat-card-image src="/assets/3.jpg" />
+    </mat-grid-tile>
+  </mat-grid-list>
+  <audio autoplay [volume]="0.1" src="assets/Sound/CreateGame.mp3" type="audio/mp3" loop></audio>

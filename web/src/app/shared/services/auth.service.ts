@@ -43,13 +43,13 @@ export class AuthService {
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
     return user !== null && user.emailVerified !== false ? true : false;
+    
   }
 
   googleAuth() {
     return this.authLogin(new firebase.auth.GoogleAuthProvider()).then((res: any) => {
       if (res) {
-        console.log("google loging");
-        this.router.navigate(['home']);
+       window.location.href = "/home"
       }
     });
   }
@@ -59,7 +59,7 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result: any) => {
         this.setUserData(result.user);
-        this.router.navigate(['home']);
+        return result.user
       })
       .catch((error: any) => {
         window.alert(error);
@@ -80,6 +80,7 @@ export class AuthService {
     return userRef.set(userData, {
       merge: true,
     });
+    
   }
 
   signOut() {

@@ -66,7 +66,7 @@ h6 {
   display: table;
   width: 100%;
   height: 100%;
-  background: #12056d;
+  
 }
 
 .displayTableCell {
@@ -196,17 +196,24 @@ label {
   text-decoration: underline;
 }
 
+.cardImage {
+  height: 150px;
+  width: 100px;
+}
 
+.card {
+  margin-left: 50px;
+  text-align: center;
+}
+  
 /* * Sidebar */
 
 .sidebar-cards {
-  margin-top: 40px;
-  height: 600px;
-  overflow-y: auto;
+  overflow-x: scroll;  
+  padding-bottom: 320px;
 }
 
 .sidebar {
-  top: 0;
   bottom: 0;
   left: 0;
   z-index: 100;
@@ -215,10 +222,9 @@ label {
 }
 
 .sidebar-sticky {
-  position: relative;
-  top: 0;
-  height: calc(100vh - 48px);
-  padding-top: 0.5rem;
+  top: 100px;
+  height: calc(100vh - 150px);
+  padding-top: 0.1rem;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -258,7 +264,7 @@ a:not([href]):not([tabindex]):hover {
   color: #e91e63;
   background: #efefef;
 }
-
+  
 /* * Content */
 [role="main"] {
   padding-top: 48px;
@@ -322,7 +328,7 @@ i {
 }
 
 .inner-adjust {
-  padding: 0 20px;
+  padding: 0 500px;
 }
 
 .action-block {
@@ -621,7 +627,8 @@ body .table thead th {
   }
 
   .displayTable {
-    background: white;
+    background-image: url('assets/Login.jpg'); 
+    
   }
 
   .authBlock {
@@ -631,6 +638,9 @@ body .table thead th {
   .px-logo {
     display: none;
   }
+
+
 }
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,12 @@
+.create .game {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.create .game {
+    transition: 0.2s all ease-in-out;
+}
+
+.create:hover .game {
+    transform: scale(1.4);
+}

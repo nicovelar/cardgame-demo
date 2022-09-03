@@ -52,4 +52,7 @@ public class JugadorAgregado extends DomainEvent {
     public Mazo getMazo() {
         return mazo;
     }
+
+    public JugadorId getJugadorId() { return identity;
+    }
 }

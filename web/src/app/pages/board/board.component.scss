@@ -1,0 +1,25 @@
+.cardplayer .mazo {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.cardplayer .mazo {
+    transition: 0.2s all ease-in-out;
+}
+
+.cardplayer:hover .mazo {
+    transform: scale(1.3);
+}
+
+.cardplayer button {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.cardplayer button {
+    transition: 0.2s all ease-in-out;
+}
+
+.cardplayer:hover button {
+    transform: scale(1.4);
+}

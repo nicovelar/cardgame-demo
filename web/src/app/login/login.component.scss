@@ -1,0 +1,13 @@
+.login .button {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.login .button {
+    transition: 0.3s all ease-in-out;
+}
+
+.login:hover .button {
+    transform: scale(1.4);
+
+}

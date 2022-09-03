@@ -16,6 +16,9 @@ export class WebsocketService {
   }
 
   close(){
-    this.subject.unsubscribe();
+    if(this.subject) {
+      this.subject.unsubscribe();
+    }
+   
   }
 }

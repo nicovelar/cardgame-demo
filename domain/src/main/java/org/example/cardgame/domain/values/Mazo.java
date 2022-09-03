@@ -4,6 +4,7 @@ import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * The type Mazo.
@@ -58,10 +59,12 @@ public class Mazo implements ValueObject<Mazo.Props> {
      */
     public Mazo retirarCarta(Carta cartaRetirada) {
         var cartaId = cartaRetirada.value().cartaId().value();
-        this.catas.removeIf(
-                carta -> cartaId.equals(carta.value().cartaId().value())
+        return new Mazo(catas.stream()
+                .filter(
+                        carta -> !cartaId.equals(carta.value().cartaId().value())
+                )
+                .collect(Collectors.toSet())
         );
-        return new Mazo(this.catas);
     }
 
     /**

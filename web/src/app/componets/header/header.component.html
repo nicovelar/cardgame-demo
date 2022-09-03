@@ -1,0 +1,26 @@
+
+<mat-toolbar color="black" style="height: 10vh;">
+  <div class="geeks">
+    <button class="menu" mat-fab color="warn" (click)="listaJuegos()">
+      <mat-icon>menu</mat-icon >
+    </button>
+  </div>
+      <h1 style="margin-left: 20px;">Lista de Juegos</h1>
+   <img src="/assets/Logo.png" style="height: 10vh; margin-left: 30%;">
+   <div class="geeks">
+    <button class="home" mat-fab color="warn"  (click)="menu()" >
+      <mat-icon>home</mat-icon>
+    </button>
+    </div>  
+    <div *ngIf="auth.isLoggedIn;" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" style="margin-left:600px; margin-top: 10px;">
+      <img src= {{auth.user.photoURL}} referrerpolicy="no-referrer" alt="Avatar" style="width: 60px;" >
+    </div>
+
+    <div class="geeks">
+      <button *ngIf="auth.isLoggedIn;" mat-icon-button class="logout" aria-label="Example icon-button with share icon"  style="margin-left:30px;">
+        <mat-icon (click)="auth.signOut()">logout</mat-icon>
+      </button>
+    </div>
+    
+   
+  </mat-toolbar>

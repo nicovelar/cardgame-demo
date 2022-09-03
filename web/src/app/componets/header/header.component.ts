@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  constructor(public auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  menu(){
+    this.router.navigate(['home'])
+  }
+
+  listaJuegos() {
+    this.router.navigate(['list'])
   }
 
 }

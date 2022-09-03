@@ -6,12 +6,12 @@ export const environment = {
   production: false,
   apiBase: "http://localhost:8080",
   firebase: {
-    apiKey: "AIzaSyCTF2ftyL3fjJwKWod0OYwrWo_jPuwiL9o",
-    authDomain: "card-game-sofka.firebaseapp.com",
-    projectId: "card-game-sofka",
-    storageBucket: "card-game-sofka.appspot.com",
-    messagingSenderId: "183741757287",
-    appId: "1:183741757287:web:1270c4d0325b09e912e1c2"
+    apiKey: "AIzaSyBhYMS0ndr4YHnkhZ9RLcxHO_d4oO6XlWA",
+  authDomain: "cardgame-92222.firebaseapp.com",
+  projectId: "cardgame-92222",
+  storageBucket: "cardgame-92222.appspot.com",
+  messagingSenderId: "519958977214",
+  appId: "1:519958977214:web:3c18fe5e3d26060ecedcef"
   }
 };
 

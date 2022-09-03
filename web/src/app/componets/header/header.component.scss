@@ -1,0 +1,43 @@
+ .geeks .menu {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.geeks .menu {
+    transition: 0.2s all ease-in-out;
+}
+
+.geeks:hover .menu {
+    transform: scale(1.4);
+}
+
+.geeks .home {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.geeks .home {
+    transition: 0.2s all ease-in-out;
+}
+
+.geeks:hover .home {
+    transform: scale(1.5);
+}
+
+
+.geeks .logout {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.geeks .logout  {
+    transition: 0.2s all ease-in-out;
+}
+
+.geeks:hover .logout  {
+    transform: scale(2);
+}
+  
+
+  
+

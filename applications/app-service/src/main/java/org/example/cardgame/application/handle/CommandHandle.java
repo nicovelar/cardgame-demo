@@ -10,8 +10,7 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
-import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
+import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 @Configuration
 public class CommandHandle {
@@ -74,6 +73,28 @@ public class CommandHandle {
         );
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> quitar(QuitarCartaEnTableroUseCase usecase) {
+        return route(
+                POST("/juego/quitar").and(accept(MediaType.APPLICATION_JSON)),
+                request -> usecase.andThen(integrationHandle)
+                        .apply(request.bodyToMono(QuitarCartaEnTablero.class))
+                        .then(ServerResponse.ok().build())
+                        .onErrorResume(errorHandler::badRequest)
+
+        );
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> eliminarJuego(EliminarJuegoUseCase usecase) {
+        return route(
+                POST("/juego/eliminar").and(accept(MediaType.APPLICATION_JSON)),
+                request -> usecase.andThen(integrationHandle)
+                        .apply(request.bodyToMono(EliminarJuego.class))
+                        .then(ServerResponse.ok().build())
+                        .onErrorResume(errorHandler::badRequest)
+        );
+    }
 
     @Bean
     public RouterFunction<ServerResponse> crearRonda(CrearRondaUseCase usecase) {

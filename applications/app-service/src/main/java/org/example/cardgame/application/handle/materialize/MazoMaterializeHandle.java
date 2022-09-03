@@ -1,10 +1,9 @@
 package org.example.cardgame.application.handle.materialize;
 
 import org.bson.Document;
+import org.example.cardgame.application.handle.model.JuegoListViewModel;
 import org.example.cardgame.application.handle.model.MazoViewModel;
-import org.example.cardgame.domain.events.CartaQuitadaDelMazo;
-import org.example.cardgame.domain.events.CartasAsignadasAJugador;
-import org.example.cardgame.domain.events.JugadorAgregado;
+import org.example.cardgame.domain.events.*;
 
 import org.example.cardgame.domain.values.Carta;
 import org.springframework.context.annotation.Configuration;
@@ -100,11 +99,24 @@ public class MazoMaterializeHandle {
         });
     }
 
+    @EventListener
+    public void handleJuegoEliminado(JuegoEliminado event){
+        template.findAllAndRemove(filterById(event.aggregateRootId()), JuegoListViewModel.class, COLLECTION_VIEW).collectList().block();
+    }
+
+
     private Query filterByUidAndId(String uid, String juegoId) {
         return new Query(
                 Criteria.where("juegoId").is(juegoId).and("uid").is(uid)
         );
     }
+
+    private Query filterById(String juegoId) {
+        return new Query(
+                Criteria.where("juegoId").is(juegoId)
+        );
+    }
+
 
 
 }

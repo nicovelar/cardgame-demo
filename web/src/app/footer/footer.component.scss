@@ -1,0 +1,201 @@
+/// Create the same keyframes twice (for retrigger in pure CSS)
+/// @author Gregor Adams
+/// @param  {Keyword} $name - name of the animation (will be suffixed with --1 and --2)
+@mixin double-keyframes($name) {
+  // write the keyframe rules to the document root
+  @at-root {
+    // write the same keyframes twice
+    @for $i from 1 through 2 {
+      $keyframe-name: unquote($name + "--" + $i);
+
+      @keyframes #{$keyframe-name} {
+        @content;
+      }
+    }
+  }
+}
+@import url(https://fonts.googleapis.com/css?family=Passion+One);
+body {
+  background: #d30215;
+  overflow: hidden;
+  margin: 0;
+  font-family: "Passion One", impact;
+}
+.bg {
+  position: absolute;
+  top: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/28359/marvel.jpg");
+  animation: fade 1000s steps(10) forwards;
+  height: 10vh;
+
+  @for $i from 1 through 2 {
+    #retrigger--#{$i}:checked ~ & {
+      animation-name: fade--#{$i};
+    }
+  }
+
+  @include double-keyframes(fade) {
+    0% {
+      background-position: 0 0;
+      opacity: 1;
+    }
+    50% {
+      background-position: 2000% 2000%;
+      opacity: 0.6;
+    }
+    100% {
+      background-position: -2000% -2000%;
+      opacity: 1;
+    }
+  }
+}
+.pane {
+  position: absolute;
+  bottom: 6vh;
+  left: 50%;
+  transform: translate(-100%, -100%) scaleY(1);
+  perspective: 1500px;
+}
+
+.rotate {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform-style: preserve-3d;
+  @for $i from 1 through 2 {
+    #retrigger--#{$i}:checked ~ .pane & {
+      animation-name: rotate--#{$i};
+    }
+  }
+
+  @include double-keyframes(rotate) {
+    0% {
+      transform: translate(-50%, -50%) rotate3d(1, -1, 0, 40deg) scale(2);
+    }
+    50% {
+      transform: translate(-50%, -50%) rotate3d(0, -0, 0, 0deg) scale(1.1);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate3d(0, -0, 0, 0deg) scale(1);
+    }
+  }
+}
+
+.logo {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -100%);
+  font-size: 6em;
+  letter-spacing: -0.06em;
+  animation: hide 8s linear forwards;
+  padding: 0 0.2em;
+  line-height: 1;
+
+  @for $i from 1 through 2 {
+    #retrigger--#{$i}:checked ~ .pane & {
+      animation-name: hide--#{$i};
+    }
+  }
+
+  &:nth-child(1) {
+    animation: change 8s steps(30) forwards;
+    @for $i from 1 through 2 {
+      #retrigger--#{$i}:checked ~ .pane & {
+        animation-name: change--#{$i};
+      }
+    }
+    background-color: #d30215;
+    background-size: 2000px auto;
+
+
+    color: transparent;
+  }
+
+  @for $i from 2 through 20 {
+    &:nth-child(#{$i}) {
+      transform: translate3d(-50%, -50%, $i * -1px);
+    }
+  }
+
+  @include double-keyframes(hide) {
+    0% {
+      visibility: visible;
+      opacity: 1;
+    }
+    100% {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  @include double-keyframes(change) {
+    0% {
+      background-position: -200% -200%;
+      color: white;
+      -webkit-filter: drop-shadow(0 0 0 white) drop-shadow(0 0 0 white)
+        drop-shadow(0 0 0 white) drop-shadow(0 0 0 white);
+      border-color: white;
+    }
+    50% {
+      background-position: -200% -200%;
+      color: white;
+      -webkit-filter: drop-shadow(0 0 0 white) drop-shadow(0 0 0 white)
+        drop-shadow(0 0 0 white) drop-shadow(0 0 0 white);
+      border-color: white;
+    }
+    100% {
+      background-position: -200% -200%;
+      color: white;
+      -webkit-filter: drop-shadow(0 0 0 white) drop-shadow(0 0 0 white)
+        drop-shadow(0 0 0 white) drop-shadow(0 0 0 white);
+      border-color: white;
+    }
+  }
+}
+
+// hide the radios that allow us to retrigger the animation
+.retrigger {
+  position: absolute;
+  left: -5em;
+  opacity: 0;
+}
+
+// the section containing the retrigger button
+@include double-keyframes(buttons) {
+  0%,
+  99% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+
+  }
+}
+.buttons {
+  position: absolute;
+  z-index: 3;
+  bottom: 10vh;
+  left: 50%;
+  width: 10em;
+  margin-left: -5em;
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  animation: button 8s linear;
+  @for $i from 1 through 2 {
+    #retrigger--#{$i}:checked ~ & {
+      animation-name: buttons--#{$i};
+    }
+  }
+
+  // the labels are disguised as buttons
+ 
+
+}
