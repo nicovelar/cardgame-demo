@@ -5,13 +5,16 @@
     <div class="row">
         <main role="main" class="col-md-7 ml-sm-auto col-lg-9 px-1">
 
-            <div class="pb-2 mb-3 border-bottom" style="right: 85vh; top:11vh; position: absolute; border-style:solid; border-color:black; background-color: rgba(245, 222, 179, 0.562);">
-                <h1 class="h2">Cuenta Regresiva: {{tiempo}} segundos</h1>
-                <h2 style="margin-left: 50px;">RONDA # {{numeroRonda}} Jugadores [{{jugadoresRonda}}/{{jugadoresTablero}}]</h2>
-                <button mat-button (click)="iniciarRonda()" disabled="{{roundStarted}}" color="primary" style="margin-left:125px ;position: relative;" >
-                   INICIAR
-                </button>
-            </div>
+           
+                <div class="pb-2 mb-3 border-bottom" style="right: 85vh; top:11vh; position: absolute; border-style:solid; border-color:black; background-color: rgba(245, 222, 179, 0.562);">
+                    <h1 class="h2">Cuenta Regresiva: {{tiempo}} segundos</h1>
+                    <h2 style="margin-left: 50px;">RONDA # {{numeroRonda}} Jugadores [{{jugadoresRonda}}/{{jugadoresTablero}}]</h2>
+                    <button mat-button (click)="iniciarRonda()" disabled="{{roundStarted}}" color="primary" style="margin-left:125px ;position: relative;" >
+                       INICIAR
+                    </button>
+                </div>
+   
+          
             <div style="display:flex; flex-direction: row">
                 <mat-grid-list cols="6" rowHeight="1:1" style="width:60%; position:absolute; bottom: 40vh;">
                     <mat-grid-tile *ngFor="let card of cartasDelTablero" >
@@ -21,7 +24,7 @@
                                 <img *ngIf="!comparar(card.cartaId)" mat-card-image src="/assets/Tapa.png" style="width: 250%; margin-top:10px;"/>  
                             </mat-card-title-group>
                             <mat-card-content *ngIf="comparar(card.cartaId)">
-                                <button (click)="quitar(card.cartaId)" style=" margin-bottom:10px; margin-left: 35px;"> Borrar</button>
+                                <button (click)="quitar(card.cartaId)" style=" margin-bottom:10px; margin-left: 35px;"> Quitar</button>
                                 Poder {{card.poder}}
                             </mat-card-content>
                         </mat-card>
